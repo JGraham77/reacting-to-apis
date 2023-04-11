@@ -61,7 +61,7 @@ const App = () => {
                 <div className="row justify-content-center m-3">
                     {people.map(person => (
                         <div className="col-12 col-md-6" key={person.id}>
-                            <div style={{ background: '#hahaha' }} className="card shadow-lg my-2">
+                            <div style={{ background: '#aaaaaa' }} className="card shadow-lg my-2">
                                 <div className="card-body">
                                     <h4 className="card-title">{person.name}</h4>
                                     <hr style={{ background: 'black' }} />
