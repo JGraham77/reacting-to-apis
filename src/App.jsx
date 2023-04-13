@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import FilmCard from './components/FilmCard';
+import PeopleCard from './components/PeopleCard';
 
 const App = () => {
     const [films, setFilms] = useState([]);
@@ -16,68 +18,48 @@ const App = () => {
     }, []);
 
 
-    if (loadGhibli === 'home') {
-        return (
-            <div className="container">
-                <h1 className='row display-5 justify-content-center mt-2'>Studio Ghibli!</h1>
-                <div className="row justify-content-center mt-2">
-                    <button onClick={() => setLoadGhibli('filmsLoaded')} className='btn btn-primary m-1'>Load Films</button>
-                    <button onClick={() => setLoadGhibli('peopleLoaded')} className='btn btn-primary m-1'>Load People</button>
-                </div>
+    return (
+        <div className="container">
+            <img height={'300em'} className='row justify-content-center mx-auto' src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/1200px-Studio_Ghibli_logo.svg.png" alt="" />
+            <div className="row justify-content-center mt-2">
+                <button onClick={() => setLoadGhibli('filmsLoaded')} className='btn btn-primary m-1'>Load Films</button>
+                <button onClick={() => setLoadGhibli('peopleLoaded')} className='btn btn-primary m-1'>Load People</button>
+                <button onClick={() => setLoadGhibli('home')} className='btn btn-primary m-1'>Back Home</button>
             </div>
-        )
-    }
+            <div className="row justify-content-center m-3">
+                {loadGhibli === 'home' && <h1>Welcome Home!</h1>}
+                {loadGhibli === 'filmsLoaded' && films.map(film => <FilmCard key={film.id} film={film} />)}
+                {loadGhibli === 'peopleLoaded' && people.map(person => <PeopleCard key={person.id} person={person} />)}
+            </div>
+        </div>
+    )
 
-    if (loadGhibli === 'filmsLoaded') {
-        return (
-            <div className="container">
-                <div className="row justify-content-center mt-2">
-                    <button onClick={() => setLoadGhibli('home')} className='btn btn-primary m-1'>Back Home</button>
-                </div>
-                <div className="row justify-content-center m-3">
-                    {films.map(film => (
-                        <div className="col-12 col-md-6" key={film.id}>
-                            <div className="card shadow-lg my-2">
-                                <div className="card-body">
-                                    <h4 className="card-title">{film.title}</h4>
-                                    <hr style={{ background: '#aaaaaa' }} />
-                                    <p className="card-text">{film.description}</p>
-                                    <a href={`${film.url}`} target='_blank' className='btn btn-info'>API Resource Link</a>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
-    };
 
-    if (loadGhibli === 'peopleLoaded') {
-        return (
-            <div className="container">
-                <div className="row justify-content-center mt-2">
-                    <button onClick={() => setLoadGhibli('home')} className='btn btn-primary m-1'>Back Home</button>
-                </div>
-                <div className="row justify-content-center m-3">
-                    {people.map(person => (
-                        <div className="col-12 col-md-6" key={person.id}>
-                            <div style={{ background: '#aaaaaa' }} className="card shadow-lg my-2">
-                                <div className="card-body">
-                                    <h4 className="card-title">{person.name}</h4>
-                                    <hr style={{ background: 'black' }} />
-                                    <p className="card-text">Age: {person.age}</p>
-                                    <p className="card-text">Gender: {person.gender}</p>
-                                    <p className="card-text">Eye Color: <span style={{ color: `${person.eye_color}` }}>{person.eye_color}</span></p>
-                                    <p className="card-text">Hair Color: <span style={{ color: `${person.hair_color}` }}>{person.hair_color}</span></p>
-                                    <a href={`${person.url}`} target='_blank' className='btn btn-info'>API Resource Link</a>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
-    }
+    // if (loadGhibli === 'filmsLoaded') {
+    //     return (
+    //         <div className="container">
+    //             <div className="row justify-content-center mt-2">
+    //                 <button onClick={() => setLoadGhibli('home')} className='btn btn-primary m-1'>Back Home</button>
+    //             </div>
+    //             <div className="row justify-content-center m-3">
+    //                 {films.map(film => <FilmCard key={film.id} film={film} />)}
+    //             </div>
+    //         </div>
+    //     )
+    // };
+
+    // if (loadGhibli === 'peopleLoaded') {
+    //     return (
+    //         <div className="container">
+    //             <div className="row justify-content-center mt-2">
+    //                 <button onClick={() => setLoadGhibli('home')} className='btn btn-primary m-1'>Back Home</button>
+    //             </div>
+    //             <div className="row justify-content-center m-3">
+    //                 {people.map(person => <PeopleCard key={person.id} person={person} />)}
+    //             </div>
+    //         </div>
+    //     )
+    // }
 }
 
 export default App;
